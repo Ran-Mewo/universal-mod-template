@@ -1,0 +1,16 @@
+plugins {
+    id 'loader'
+}
+
+unimined.minecraft(sourceSets.main) {
+    fabric {
+        loader gradle.ext.fabric_loader
+    }
+}
+
+downgradeJar {
+    inputFile = tasks.remapJar.archiveFile
+    archiveClassifier.set(null)
+}
+jar.finalizedBy(remapJar)
+remapJar.finalizedBy(shadeDowngradedApi)

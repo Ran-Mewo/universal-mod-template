@@ -1,0 +1,11 @@
+plugins {
+    id 'unimined-fabric'
+}
+
+repositories {
+
+}
+
+dependencies {
+
+}

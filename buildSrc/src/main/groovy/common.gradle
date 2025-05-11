@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'manifold'
+    id 'maven-publish'
+    id 'xyz.wagyourtail.unimined'
+    id 'xyz.wagyourtail.jvmdowngrader'
+}
+
+base {
+    archivesName = "${mod_name}-${project.name}-${gradle.ext.minecraft_version}"
+}
+
+repositories {
+    mavenCentral()
+}
+
+unimined.minecraft(sourceSets.main, true) {
+    version gradle.ext.minecraft_version
+
+    mappings {
+        mojmap()
+        devNamespace "mojmap"
+    }
+}
+
+processResources {
+    def compatible_forgemc_versions = "${gradle.ext.compatible_mc_versions}".replaceAll("\"", "").replaceAll("]", ",)")
+
+    var expandProps = ['version'                      : version,
+                       'group'                        : project.group, //Else we target the task's group.
+                       'minecraft_version'            : gradle.ext.minecraft_version,
+                       'compatible_mc_versions'       : gradle.ext.compatible_mc_versions,
+                       'compatible_forgemc_versions'  : compatible_forgemc_versions,
+                       'mod_name'                     : mod_name,
+                       'mod_authors'                  : mod_authors,
+                       'mod_id'                       : mod_id,
+                       'license'                      : license,
+                       'description'                  : project.description,
+                       'neoforge_loader'              : gradle.ext.neoforge_loader,
+                       'forge_loader'                 : gradle.ext.forge_loader,
+                       'credits'                      : credits,
+                       'java_version'                 : gradle.ext.java_version]
+
+    filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
+        expand expandProps
+    }
+    inputs.properties(expandProps)
+}
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+    enabled = false
+}
+
+jvmdg.downgradeTo = JavaVersion.toVersion(gradle.ext.java_version)
+shadeDowngradedApi { archiveClassifier.set(null) }

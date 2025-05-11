@@ -1,0 +1,10 @@
+plugins {
+    id 'common'
+}
+
+unimined.minecraft {
+    fabric {
+        loader gradle.ext.fabric_loader
+    }
+    defaultRemapJar = false
+}

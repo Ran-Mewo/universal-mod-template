@@ -1,0 +1,30 @@
+plugins {
+    id 'xyz.wagyourtail.manifold'
+    id 'java-library'
+}
+
+manifold {
+    version = rootProject.manifold_version
+
+    // This creates build.properties everywhere, there needs to be only one. Uncomment and remove manifold-preprocessor-gen.gradle if unimined ever fixes it.
+//    preprocessor {
+//        ideActiveConfig = ""
+//
+//        config {
+//            loadVersionProperties()
+//            gradle.ext.mcVers.eachWithIndex { ver, idx ->
+//                property("MC_${ver.replace('.', '_')}", idx) // Add a number to each version, example: MC_1_19_4 = 0, MC_1_20_1 = 1, etc
+//                if (gradle.ext.mcIndex == idx) property("MC_VER", idx) // Set the current version, example: if the current version is 1.20.1, then MC_VER = 1 (because MC_1_20_1 = 1)
+//            }
+//        }
+//    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor(manifold.module("preprocessor"))
+    annotationProcessor(manifold.module("strings"))
+}

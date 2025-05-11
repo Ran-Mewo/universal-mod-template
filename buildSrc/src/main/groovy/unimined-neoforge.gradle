@@ -1,0 +1,15 @@
+plugins {
+    id 'loader'
+}
+
+unimined.minecraft(sourceSets.main) {
+    neoForged {
+        loader gradle.ext.neoforge_loader
+    }
+}
+
+downgradeJar {
+    inputFile = tasks.remapJar.archiveFile
+}
+jar.finalizedBy(remapJar)
+remapJar.finalizedBy(downgradeJar)
