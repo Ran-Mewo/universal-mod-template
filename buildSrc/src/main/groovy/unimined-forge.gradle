@@ -7,9 +7,9 @@ unimined.minecraft(sourceSets.main) {
         loader gradle.ext.forge_loader
     }
 }
+runClient.javaLauncher = null
+runServer.javaLauncher = null
 
-downgradeJar {
-    inputFile = tasks.remapJar.archiveFile
-}
+downgradeJar.inputFile = tasks.remapJar.archiveFile
 jar.finalizedBy(remapJar)
 remapJar.finalizedBy(downgradeJar)

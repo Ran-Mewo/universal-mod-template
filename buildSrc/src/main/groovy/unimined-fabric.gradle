@@ -7,10 +7,9 @@ unimined.minecraft(sourceSets.main) {
         loader gradle.ext.fabric_loader
     }
 }
+runClient.javaLauncher = null
+runServer.javaLauncher = null
 
-downgradeJar {
-    inputFile = tasks.remapJar.archiveFile
-    archiveClassifier.set(null)
-}
+downgradeJar.inputFile = tasks.remapJar.archiveFile
 jar.finalizedBy(remapJar)
 remapJar.finalizedBy(shadeDowngradedApi)

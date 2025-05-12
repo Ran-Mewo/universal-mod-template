@@ -8,3 +8,5 @@ unimined.minecraft {
     }
     defaultRemapJar = false
 }
+runClient.javaLauncher = null
+runServer.javaLauncher = null

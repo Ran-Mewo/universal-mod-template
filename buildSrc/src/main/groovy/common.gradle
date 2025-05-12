@@ -52,4 +52,5 @@ tasks.withType(GenerateModuleMetadata).configureEach {
 }
 
 jvmdg.downgradeTo = JavaVersion.toVersion(gradle.ext.java_version)
-shadeDowngradedApi { archiveClassifier.set(null) }
+downgradeJar.archiveClassifier.set(null)
+shadeDowngradedApi.archiveClassifier.set(null)
