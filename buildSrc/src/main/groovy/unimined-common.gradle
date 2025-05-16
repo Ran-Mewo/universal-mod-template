@@ -1,9 +1,9 @@
 plugins {
-    id 'common'
+    id 'minecraft'
 }
 
 unimined.minecraft {
-    fabric {
+    fabric { // Use fabric loader so mixin extras and other such goodies are automatically included
         loader gradle.ext.fabric_loader
     }
     defaultRemapJar = false

@@ -1,5 +1,5 @@
 plugins {
-    id 'loader'
+    id 'minecraft'
 }
 
 unimined.minecraft(sourceSets.main) {
@@ -9,7 +9,3 @@ unimined.minecraft(sourceSets.main) {
 }
 runClient.javaLauncher = null
 runServer.javaLauncher = null
-
-downgradeJar.inputFile = tasks.remapJar.archiveFile
-jar.finalizedBy(remapJar)
-remapJar.finalizedBy(shadeDowngradedApi)

@@ -1,6 +1,17 @@
 plugins {
     id 'common'
+    id 'xyz.wagyourtail.unimined'
 }
+
+unimined.minecraft(sourceSets.main, true) {
+    version gradle.ext.minecraft_version
+
+    mappings {
+        mojmap()
+    }
+}
+
+if (project.name == "common") return // Don't apply the code below to the common project
 
 dependencies {
     implementation(project(":common"))

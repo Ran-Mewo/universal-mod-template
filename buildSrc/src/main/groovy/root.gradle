@@ -1,19 +1,5 @@
 plugins {
-    id 'xyz.wagyourtail.manifold'
-    id 'java-library'
-}
-
-manifold {
-    version = rootProject.manifold_version
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    annotationProcessor(manifold.module("preprocessor"))
-    annotationProcessor(manifold.module("strings"))
+    id 'common'
 }
 
 // Create a build.properties file at the root with all the preprocessor definitions
@@ -30,3 +16,13 @@ def writePreprocessorDefinitions() {
     new File(rootDir, "build.properties").text = sb.toString()
 }
 writePreprocessorDefinitions()
+
+// Make JVMDowngrader downgrade the remapped jar
+gradle.projectsEvaluated {
+    rootProject.subprojects.each {
+        if (it.tasks.findByName('remapJar') == null) return
+        it.tasks.downgradeJar.inputFile = it.tasks.remapJar.archiveFile
+        it.tasks.jar.finalizedBy(it.tasks.remapJar)
+        it.tasks.remapJar.finalizedBy(it.tasks.shadeDowngradedApi)
+    }
+}
