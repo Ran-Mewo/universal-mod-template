@@ -13,6 +13,16 @@ unimined.minecraft(sourceSets.main, true) {
 
 if (project.name == "common") return // Don't apply the code below to the common project
 
+unimined.minecraft(sourceSets.main, true) {
+    mods.modImplementation {
+        mixinRemap {
+            reset()
+            enableBaseMixin()
+            enableMixinExtra()
+        }
+    }
+}
+
 dependencies {
     implementation(project(":common"))
 }
