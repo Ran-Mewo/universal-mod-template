@@ -2,7 +2,7 @@ plugins {
     id 'minecraft'
 }
 
-unimined.minecraft(sourceSets.main) {
+unimined.minecraft {
     forge {
         loader gradle.ext.forge_loader
         useToolchains = false // Disable toolchains so modern java can be used

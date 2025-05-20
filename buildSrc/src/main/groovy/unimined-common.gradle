@@ -7,6 +7,5 @@ unimined.minecraft {
         loader gradle.ext.fabric_loader
     }
     defaultRemapJar = false
+    runs.off = true
 }
-runClient.javaLauncher = null
-runServer.javaLauncher = null

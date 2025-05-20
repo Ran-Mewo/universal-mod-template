@@ -2,7 +2,7 @@ plugins {
     id 'minecraft'
 }
 
-unimined.minecraft(sourceSets.main) {
+unimined.minecraft {
     fabric {
         loader gradle.ext.fabric_loader
     }
