@@ -1,5 +1,5 @@
 plugins {
-    id 'unimined-forge'
+    id 'unimined-forge' // <-- Go here for Forge mixin configuration (CTRL+Left Click)
 }
 
 repositories {
